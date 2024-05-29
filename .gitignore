@@ -1,3 +1,9 @@
-# Only *.cpp and *.h
-!*.cpp
+# Ignore Everything
+*
+
+# But not .cpp
+!.gitignore
+!*.md
 !*.h
+!*.cpp
+
