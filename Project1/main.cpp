@@ -5,7 +5,8 @@
 
 using namespace std;
 
-struct Point {
+class Point {
+public:
 	double x = 0;
 	double y = 0;
 	double z = 0;
@@ -25,7 +26,9 @@ struct Point {
 	}
 };
 
-struct Sceleton {
+class Sceleton {
+public:
+	int id = 0;
 	int healf_points = 100;
 	int demage = 10;
 	double speed = 2;
@@ -33,7 +36,7 @@ struct Sceleton {
 
 	void show() const {
 		// const Point& pt = scelet.position; // псевдоним
-		cout << "Sceleton at ("
+		cout << "Sceleton " << id << " at("
 			<< position.x << ", "
 			<< position.y << ") "
 			<< "HP: " << healf_points
@@ -41,6 +44,8 @@ struct Sceleton {
 	}
 
 	void move_sceleton() {
+		if (healf_points < 0)
+			return;
 		// случайный поворот на 0.1 углового градуса 
 		//double angle = (double)(rand() % 3600)/10;
 		double angle = (rand() % 360) * M_PI / 180;
@@ -59,11 +64,22 @@ struct Sceleton {
 			position.y = 10;
 	}
 
+	void attack(Sceleton& scelet) {
+		if (healf_points <= 0)
+			return;
+
+		if (position.get_distance(
+			scelet.position
+		) < 1) {
+			if (scelet.healf_points > 0) {
+				// случайный урон от 7 до 10
+				scelet.healf_points -= demage - rand() % 8;
+				if (scelet.healf_points < 0)
+					scelet.healf_points = 0;
+			}
+		}
+	}
 };
-
-
-
-
 
 void test_point() {	
 	Point p1, p2;
@@ -93,17 +109,12 @@ Sceleton construct_sceleton(double x, double y) {
 	return scelet;
 }
 
-
-
-void attack() {
-
-}
-
-
-
 void run_rpg() {
 	Sceleton scelet1 = construct_sceleton(1, 2);
+	scelet1.id = 1;
 	Sceleton scelet2 = construct_sceleton(2, 1);
+	scelet2.id = 2;
+
 	scelet1.show();
 	scelet2.show();
 	while (
@@ -115,12 +126,22 @@ void run_rpg() {
 		scelet1.show();
 		scelet2.show();
 	}
+	while (
+		scelet1.healf_points > 0 &&
+		scelet2.healf_points > 0
+		) {
+		scelet1.attack(scelet2);
+		scelet2.attack(scelet1);
+		scelet1.show();
+		scelet2.show();
+	}
 }
 
-void main() {
+int main() {
 	srand(time(NULL));
 	//cout << "Hello git" << endl;
 	//cout << "Bye git" << endl;
 	//test_point();
 	run_rpg();
+	return 0;
 }
