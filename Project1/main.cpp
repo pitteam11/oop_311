@@ -9,6 +9,21 @@ struct Point {
 	string color = "white";
 };
 
+struct Sceleton {
+	int healf_points = 100;
+	int demage = 10;
+	double speed = 2;
+	Point position;
+};
+
+void show_sceleton(const Sceleton& scelet) {
+	// const Point& pt = scelet.position; // псевдоним
+	cout << "Sceleton at ("
+		<< scelet.position.x << ", "
+		<< scelet.position.y << ") "
+		<< "HP: " << scelet.healf_points;
+}
+
 void show_point(const Point& pt) {
 	cout << "(" << pt.x << ", "
 		 << pt.y << ", "
@@ -26,19 +41,25 @@ void test_point() {
 	show_point(p1);
 	show_point(p2);
 
-	Point pnts[10];
+	const int size = 10;
+	Point pnts[size];
 	pnts[0] = {12, 14, 14, "black"};
 	
-	for (int k = 1; k < 10; k++)
+	for (int k = 1; k < size; k++)
 		pnts[k] = { (double)k, 12, 0, "blue" };
 
-	for (int k = 1; k < 10; k++)
+	for (int k = 1; k < size; k++)
 		show_point(pnts[k]);
+}
 
+void run_rpg() {
+	Sceleton scelet;
+	show_sceleton(scelet);
 }
 
 void main() {
-	cout << "Hello git" << endl;
-	cout << "Bye git" << endl;
-	test_point();
+	//cout << "Hello git" << endl;
+	//cout << "Bye git" << endl;
+	//test_point();
+	run_rpg();
 }
