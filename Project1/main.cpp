@@ -1,5 +1,8 @@
 #include <iostream>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 using namespace std;
 
 struct Point {
@@ -7,6 +10,19 @@ struct Point {
 	double y = 0;
 	double z = 0;
 	string color = "white";
+
+	void show() {
+		cout << "(" << x << ", "
+			<< y << ", "
+			<< z << ") - "
+			<< color << endl;
+	}
+
+	double get_distance(const Point& pt) {
+		double dx = x - pt.x;
+		double dy = y - pt.y;
+		return sqrt(dx * dx + dy * dy);
+	}
 };
 
 struct Sceleton {
@@ -14,22 +30,40 @@ struct Sceleton {
 	int demage = 10;
 	double speed = 2;
 	Point position;
+
+	void show() const {
+		// const Point& pt = scelet.position; // псевдоним
+		cout << "Sceleton at ("
+			<< position.x << ", "
+			<< position.y << ") "
+			<< "HP: " << healf_points
+			<< endl;
+	}
+
+	void move_sceleton() {
+		// случайный поворот на 0.1 углового градуса 
+		//double angle = (double)(rand() % 3600)/10;
+		double angle = (rand() % 360) * M_PI / 180;
+		position.x += speed * cos(angle);
+		position.y += speed * sin(angle);
+		if (position.x <= 0)
+			position.x = 0;
+
+		if (position.x >= 10)
+			position.x = 10;
+
+		if (position.y <= 0)
+			position.y = 0;
+
+		if (position.y >= 10)
+			position.y = 10;
+	}
+
 };
 
-void show_sceleton(const Sceleton& scelet) {
-	// const Point& pt = scelet.position; // псевдоним
-	cout << "Sceleton at ("
-		<< scelet.position.x << ", "
-		<< scelet.position.y << ") "
-		<< "HP: " << scelet.healf_points;
-}
 
-void show_point(const Point& pt) {
-	cout << "(" << pt.x << ", "
-		 << pt.y << ", "
-		 << pt.z << ") - "
-		 << pt.color << endl;
-}
+
+
 
 void test_point() {	
 	Point p1, p2;
@@ -38,8 +72,8 @@ void test_point() {
 	p1.z = 7;
 	p1.color = "red";
 
-	show_point(p1);
-	show_point(p2);
+	p1.show();
+	p2.show();
 
 	const int size = 10;
 	Point pnts[size];
@@ -49,15 +83,42 @@ void test_point() {
 		pnts[k] = { (double)k, 12, 0, "blue" };
 
 	for (int k = 1; k < size; k++)
-		show_point(pnts[k]);
+		pnts[k].show();
 }
 
-void run_rpg() {
+Sceleton construct_sceleton(double x, double y) {
 	Sceleton scelet;
-	show_sceleton(scelet);
+	scelet.position.x = x;
+	scelet.position.y = y;
+	return scelet;
+}
+
+
+
+void attack() {
+
+}
+
+
+
+void run_rpg() {
+	Sceleton scelet1 = construct_sceleton(1, 2);
+	Sceleton scelet2 = construct_sceleton(2, 1);
+	scelet1.show();
+	scelet2.show();
+	while (
+		scelet1.position.get_distance(
+			scelet2.position
+		) > 0.5) {
+		scelet1.move_sceleton();
+		scelet2.move_sceleton();
+		scelet1.show();
+		scelet2.show();
+	}
 }
 
 void main() {
+	srand(time(NULL));
 	//cout << "Hello git" << endl;
 	//cout << "Bye git" << endl;
 	//test_point();
