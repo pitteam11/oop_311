@@ -4,7 +4,7 @@
 using namespace std;
 
 class Student {
-
+	
 	enum UNIVERS {MSU, SFU, DSTU, MIT};
 
 	class Univercity {
@@ -17,16 +17,16 @@ class Student {
 		Univercity(UNIVERS name) {
 			switch (name)
 			{
-			case Student::MSU:
+			case UNIVERS::MSU:
 				city = "Moscow";
 				country = "Russia";
 				break;
-			case Student::SFU:				
-			case Student::DSTU:
+			case UNIVERS::SFU:
+			case UNIVERS::DSTU:
 				city = "Rostov-on-Don";
 				country = "Russia";
 				break;
-			case Student::MIT:
+			case UNIVERS::MIT:
 				city = "Cambridge";
 				country = "USA";
 				break;
@@ -45,7 +45,8 @@ private:
 	//Univercity univercity;
 
 public:
-	Student(){
+	Student(string fio){
+		this->fio = fio;
 		//univercity = Univercity(UNIVERS::MIT);
 	}
 
@@ -71,6 +72,36 @@ public:
 		return phone;
 	}
 	
+	void set_city(string city) {
+		this->city = city;
+	}
+
+	string get_city() {
+		return city;
+	}
+
+	void set_country(string country) {
+		this->country = country;
+	}
+
+	string get_country() {
+		return country;
+	}
+
+	void set_age(int age) {
+		if (age <= 1 || age >= 150) {
+			cout << "Bad format age\n";
+			return;
+		}
+		else {
+			this->age = age;
+		}
+	}
+
+	string get_fio() {
+		return fio;
+	}
+
 	void show() {
 		cout << fio << " " << phone << endl;
 	}
@@ -81,14 +112,15 @@ public:
 };
 
 void test_student() {
-	Student student;
+	Student student = Student("Goncharov Petr Petrovich");
 	
 	string s;
 	cout << "Enter the phone" << endl;
-	cin >> s;
+	//cin >> s;
+	s = "89281234567";
 	student.set_phone(s);
 	cout << "This is phone: ";
-	cout << student.get_phone();
+	cout << student.get_phone() << endl;
 	
-	//student.show();	
+	student.show();	
 }
