@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "Sceleton.h"
 #include "Student.h"
+#include "Fraction.h"
 
 using namespace std;
 
@@ -29,7 +30,17 @@ int main() {
 	//cout << "Bye git" << endl;
 	//test_point();
 	//run_rpg();
-	test_student();
+	//test_student();
+
+	Fraction frac1(1, 2);
+	Fraction frac2(1, 3);
+	Fraction res = frac1.add(frac2);
+
+	cout << 
+
+	//cout << frac1.show() << " + "
+	//	<< frac2.show() << " = "
+	//	<< res.show() << endl;
 
 	return 0;
 }

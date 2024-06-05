@@ -26,8 +26,6 @@ private:
 
 public:
 	Student(string fio);
-		//fio{ fio };
-		 //Univercity(UNIVERS::MIT) ;
 	void set_phone(string phone);
 	string get_phone();	
 	void set_city(string city);
@@ -40,4 +38,3 @@ public:
 
 	~Student();
 };
-
