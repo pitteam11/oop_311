@@ -9,6 +9,20 @@
 
 using namespace std;
 
+void test_student() {
+	Student student("Goncharov Petr Petrovich");
+
+	string s;
+	cout << "Enter the phone" << endl;
+	//cin >> s;
+	s = "89281234567";
+	student.set_phone(s);
+	cout << "This is phone: ";
+	cout << student.get_phone() << endl;
+
+	student.show();
+}
+
 int main() {
 	srand(time(NULL));
 	//cout << "Hello git" << endl;
