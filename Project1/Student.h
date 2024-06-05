@@ -50,7 +50,7 @@ public:
 	}
 
 	void set_phone(string phone) {
-		if (phone.size() == 10) {
+		if (phone.size() == 11) {
 			if (phone[0] == '7')
 				this->phone = "+" + phone;
 			else if (phone[0] == '8') {
@@ -58,6 +58,17 @@ public:
 				this->phone = "+" + phone;
 			}
 		}
+		else if (
+			phone.size() == 12 &&
+			phone[0] == '+' &&
+			phone[1] == '7')
+			this->phone = phone;
+		else
+			cout << "Bad format for phone\n";
+	}
+
+	string get_phone() {
+		return phone;
 	}
 	
 	void show() {
@@ -70,8 +81,14 @@ public:
 };
 
 void test_student() {
-	Student student;	
-	student.show();
-
+	Student student;
 	
+	string s;
+	cout << "Enter the phone" << endl;
+	cin >> s;
+	student.set_phone(s);
+	cout << "This is phone: ";
+	cout << student.get_phone();
+	
+	//student.show();	
 }
