@@ -36,11 +36,12 @@ int main() {
 	Fraction frac2(1, 3);
 	Fraction res = frac1.add(frac2);
 
-	cout << 
-
-	//cout << frac1.show() << " + "
-	//	<< frac2.show() << " = "
-	//	<< res.show() << endl;
+	frac1.show();
+	cout << " + ";
+	frac2.show();
+	cout << " = ";
+	res.show();
+	cout << endl;
 
 	return 0;
 }
