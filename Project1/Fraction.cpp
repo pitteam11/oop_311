@@ -10,6 +10,12 @@ Fraction Fraction::add(Fraction frac){
 	return Fraction(res_nom, res_den);
 }
 
+Fraction Fraction::mul(Fraction frac) {
+	int res_nom = Nom * frac.Nom;
+	int res_den = Den * frac.Den;
+	return Fraction(res_nom, res_den);
+}
+
 void Fraction::show(){
 	cout <<  Nom << "/" << Den;	
 }

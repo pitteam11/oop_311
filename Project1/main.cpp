@@ -33,11 +33,11 @@ int main() {
 	//test_student();
 
 	Fraction frac1(1, 2);
-	Fraction frac2(1, 3);
-	Fraction res = frac1.add(frac2);
+	Fraction frac2(2, 3);
+	Fraction res = frac1.mul(frac2);
 
 	frac1.show();
-	cout << " + ";
+	cout << " * ";
 	frac2.show();
 	cout << " = ";
 	res.show();

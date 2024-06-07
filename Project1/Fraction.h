@@ -11,6 +11,7 @@ public:
 		Den{ Den }, Nom{ Nom }{};
 
 	Fraction add(Fraction frac);
+	Fraction mul(Fraction frac);
 
 	void show();
 };
