@@ -30,7 +30,43 @@ void walk(Animal any, int new_x=8, int new_y=8) {
 }
 
 
+class Hardware {
+private:
+	int id = 0;
+	string sn = "";
+public:
+	Hardware() {};
+	Hardware(int id, string sn) : id{ id }, sn{sn} {};
+	~Hardware() {};
+
+	int get_id() {
+		return id;
+	}
+
+	string get_sn() {
+		return sn;
+	}
+};
+
+class Mouse : public Hardware {
+};
+
+class Keyboard : public Hardware {
+};
+
+class Printer : public Hardware {
+};
+
+
+
 int main() {
+	system("chcp 1251"); // вместо setlocale(LC_ALL, "ru")
+	system("cls");
+	//system("pause");
+	//system("git add .")
+
+	cout << "Привет" << endl;
+
 	Animal chudo_yuda;
 	chudo_yuda.move(4,7);
 	chudo_yuda.get_pos();
