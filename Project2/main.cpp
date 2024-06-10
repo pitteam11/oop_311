@@ -48,7 +48,7 @@ private:
 	int id = 0;
 	string sn = "";
 public:
-	Hardware() {};
+	//Hardware() {};
 	Hardware(int id, string sn) : id{ id }, sn{sn} {};
 	~Hardware() {};
 
@@ -61,13 +61,20 @@ public:
 	}
 };
 
+// явный вызов конструктора предка с параметрами.
 class Mouse : public Hardware {
+public:
+	Mouse(int id, string sn) : Hardware(id, sn) {};
 };
 
 class Keyboard : public Hardware {
+public:
+	Keyboard(int id, string sn) : Hardware(id, sn) {};
 };
 
 class Printer : public Hardware {
+public:
+	Printer(int id, string sn) : Hardware(id, sn) {};
 };
 
 void test_animal() {
@@ -97,6 +104,7 @@ void test_animal() {
 	animals[0] = pSharik;
 	animals[1] = &Musya;
 
+	// ѕолиморфизм разобрали не полностью.
 	cout << "Sharik ";
 	((Cat*)animals[0])->sound();
 	cout << "Musya ";
@@ -104,7 +112,7 @@ void test_animal() {
 }
 
 void test_hardware() {
-	Mouse device1; // не по€вилс€ конструктор дл€ наследника
+	Mouse device1(45, "MOUSE-12"); // не по€вилс€ конструктор дл€ наследника
 	cout << device1.get_id() << " " 
 		 << device1.get_sn() << endl;
 	
@@ -118,7 +126,9 @@ int main() {
 
 
 	cout << "ѕривет" << endl;
-	test_animal();
+	//test_animal();
+
+	test_hardware();
 
 	return 0;
 }
