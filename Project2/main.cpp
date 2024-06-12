@@ -48,7 +48,7 @@ private:
 	int id = 0;
 	string sn = "";
 public:
-	//Hardware() {};
+	Hardware() : Hardware(0, "s/n") {};
 	Hardware(int id, string sn) : id{ id }, sn{sn} {};
 	~Hardware() {};
 
