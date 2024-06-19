@@ -8,7 +8,7 @@ class Array
 	int size;
 	int* array;
 public:
-	Array(int size = 10);
+	explicit Array(int size = 10);
 	~Array();
 	int getSize() const;
 	int getValue(int index) const;
@@ -59,9 +59,12 @@ int main()
 	{
 		array.setValue(i, size - i);
 	}
+
+	Array arr(array);
+
 	display(array);
 	cout << "!!!" << endl;
-	display(Array(3));
+	display(3);
 	_getch();
 	return 0;
 }
