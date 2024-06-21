@@ -33,9 +33,16 @@ public:
 		return Fraction(n, d);
 	}
 
-	friend void operator<<(ostream& output, const Fraction& a)  {
+	friend ostream& operator<<(ostream& output, const Fraction& a){		
 		output << "I'm operator<<" << a.Num << "/" << a.Den;
+		return output;
 	}
+
+	friend istream& operator>>(istream& input, Fraction& a) {
+		input >> a.Num >> a.Den;
+		return input;
+	}
+
 
 	friend void show_frind(const Fraction& a) {
 		cout << "I'm friend: ";
