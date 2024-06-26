@@ -111,8 +111,45 @@ public:
 	Number mult(int val) {
 		n *= val;
 		return *this;
-	}	
+	}
+
+	// prefex increment
+	Number& operator++() {
+		++n;
+		return *this;
+	}
+
+	// postfix increment
+	const Number operator++(int) {
+		Number tmp(n);
+		++n;
+		return tmp;
+	}
+
+	operator int() const{
+		cout << "I'm cast to int" << endl;
+		return n;
+	}
+
+	operator double() const {
+		cout << "I'm cast to double" << endl;
+		return (double)n;
+	}
 };
+
+void test_number2() {
+	//int k = 6;
+	//cout << ++k << endl;
+	//cout << k << endl;
+
+	Number obj(6);
+	//obj++;
+	cout << obj++ << endl;
+	cout << obj << endl;
+
+	cout << (int)obj << endl;
+	
+}
 
 class Empty {
 
@@ -174,6 +211,9 @@ public:
 		// deep copy
 		if (this != &a) {
 			this->data = new int[size];
+			
+			//copy(a.data, a.data + a.size, data);
+			
 			for (int k = 0; k < size; k++)
 				this->data[k] = a.data[k];
 		}
@@ -227,7 +267,52 @@ public:
 	void set_data(int k, int val) {
 		data[k] = val;
 	}
+
+	int operator[](const int k) const {
+		cout << "operator int " << endl;
+		if ((k >= 0) && (k < size))
+			return data[k];
+		else
+			cout << "ERROR" << endl;
+	}
+
+	int& operator[](const int k) {
+		cout << "operator int& " << endl;
+		if ((k >= 0) && (k < size))
+			return data[k];
+		else
+			cout << "ERROR" << endl;
+	}
+
+	int operator()() const {
+		int sum = 0;
+		for (int k = 0; k < size; k++) {
+			sum += data[k];
+		}
+		return sum;
+	}
+
+	int operator()(const int max_k) {
+		int sum = 0;
+		int val = min(max_k, size);
+		for (int k = 0; k < val; k++) {
+			sum += data[k];
+		}
+		return sum;
+	}
 };
+
+void test_dynarray2() {
+	int* data = new int[] {1,2,3};
+	DynArray arr(3, data);
+	delete[] data;
+	
+	
+	arr[0] = 100;
+	cout << arr[0] << endl;
+	cout << arr() << endl;
+	cout << arr(2) << endl;
+}
 
 void test_dynarray() {
 	int* data = new int[] {1, 2, 3, 4, 5, 6};
@@ -255,7 +340,8 @@ void test_dynarray() {
 
 
 int main() {
-	test_dynarray();
+	test_number2();
+	//test_dynarray2();
 	//test_reference();
 	//Empty r();
 	//test1();
