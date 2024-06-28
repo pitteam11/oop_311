@@ -17,21 +17,21 @@ public:
 		cout << x << ", " << y << endl;
 	}
 
-	void sound() {
+	virtual void sound() {
 		cout << "RRRRR" << endl;
 	}
 };
 
 class Cat:public Animal {
 public:
-	void sound() {
+	virtual void sound() {
 		cout << "Myau Myau" << endl;
 	}
 };
 
 class Dog :public Animal {
 public:
-	void sound() {
+	virtual void sound() {
 		cout << "Gav Gav" << endl;
 	}
 };
@@ -96,7 +96,7 @@ void test_animal() {
 	Bobik.sound();
 	Musya.sound();
 
-	Dog* pSharik{};
+	Dog* pSharik = new Dog();
 	pSharik->sound();
 
 	Animal* animals[2];
@@ -106,9 +106,9 @@ void test_animal() {
 
 	// Полиморфизм разобрали не полностью.
 	cout << "Sharik ";
-	((Cat*)animals[0])->sound();
+	animals[0]->sound();
 	cout << "Musya ";
-	((Dog*)animals[1])->sound();
+	animals[1]->sound();
 }
 
 void test_hardware() {
@@ -126,9 +126,9 @@ int main() {
 
 
 	cout << "Привет" << endl;
-	//test_animal();
+	test_animal();
 
-	test_hardware();
+	//test_hardware();
 
 	return 0;
 }
